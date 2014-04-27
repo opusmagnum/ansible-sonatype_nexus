@@ -1,0 +1,6 @@
+- name: restart nexus
+  service:
+    name="{{nexus_service_name}}"
+    state=restarted
+    enabled=true
+    

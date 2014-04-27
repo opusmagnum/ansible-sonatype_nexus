@@ -1,0 +1,6 @@
+---
+
+- include     : nexus.yml
+#- include     : plugins.yml
+- include     : settings.yml
+
