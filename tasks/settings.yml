@@ -9,6 +9,7 @@
     group={{nexus_user}}
     mode=0644
   notify: restart nexus
+  tags: nexus_setting
 
 - name: settings | Deploy nexus.xml
   template: 

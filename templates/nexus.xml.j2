@@ -8,9 +8,9 @@
     <queryString></queryString>
   </globalConnectionSettings>
   <restApi>
+    <baseUrl>{{nexus_restApi_baseUrl}}</baseUrl>
+    <forceBaseUrl>{{nexus_restApi_forceBaseUrl}}</forceBaseUrl>
     <uiTimeout>{{nexus_restApi_uiTimeout}}</uiTimeout>
-    <forceBaseUrl>{{nexus_restApi_forceBaseUrl}}</forceBaseUrl>    
-    <baseUrl>{{nexus_restApi_baseUrl}}</uiTimeout>    
   </restApi>
   <httpProxy>
     <enabled>{{nexus_httpProxy_enabled}}</enabled>
@@ -67,8 +67,14 @@
 {% if repository.externalConfiguration_artifactMaxAge is defined %}
         <artifactMaxAge>{{repository.externalConfiguration_artifactMaxAge}}</artifactMaxAge>
 {% endif %}
+{% if repository.externalConfiguration_metadataMaxAge is defined %}
+        <metadataMaxAge>{{repository.externalConfiguration_metadataMaxAge}}</metadataMaxAge>
+{% endif %}
 {% if repository.externalConfiguration_itemMaxAge is defined %}
         <itemMaxAge>{{repository.externalConfiguration_itemMaxAge}}</itemMaxAge>
+{% endif %}
+{% if repository.externalConfiguration_autoBlockActive is defined %}
+        <autoBlockActive>{{repository.externalConfiguration_autoBlockActive}}</autoBlockActive>
 {% endif %}
 {% if repository.externalConfiguration_cleanseRepositoryMetadata is defined %}
         <cleanseRepositoryMetadata>{{repository.externalConfiguration_cleanseRepositoryMetadata}}</cleanseRepositoryMetadata>
@@ -78,6 +84,9 @@
 {% endif %}
 {% if repository.externalConfiguration_checksumPolicy is defined %}
         <checksumPolicy>{{repository.externalConfiguration_checksumPolicy}}</checksumPolicy>
+{% endif %}
+{% if repository.externalConfiguration_fileTypeValidation is defined %}
+        <fileTypeValidation>{{repository.externalConfiguration_fileTypeValidation}}</fileTypeValidation>
 {% endif %}
 {% if repository.externalConfiguration_repositoryPolicy is defined %}
         <repositoryPolicy>{{repository.externalConfiguration_repositoryPolicy}}</repositoryPolicy>
@@ -91,6 +100,13 @@
           <memberRepository>{{memberRepository}}</memberRepository>
 {% endfor %}
         </memberRepositories>
+{% endif %}
+{% if repository.externalConfiguration_welcomeFiles is defined %}
+        <welcomeFiles>
+{% for welcomefile in repository.externalConfiguration_welcomeFiles %}
+          <welcomeFile>{{ welcomefile }}</welcomeFile>
+{% endfor %}
+        </welcomeFiles>
 {% endif %}
       </externalConfiguration>
     </repository>
@@ -129,6 +145,34 @@
     </repositoryTarget>
 {% endfor %}
   </repositoryTargets>
+{% if nexus_tasks is defined %}
+ <tasks>
+{% for task in nexus_tasks %}
+    <task>
+      <id>{{task.id}}</id>
+      <name>{{task.name}}</name>
+      <enabled>{{task.enabled}}</enabled>
+      <type>{{task.type}}</type>
+      <status>{{task.status}}</status>
+      <nextRun>{{task.nextRun}}</nextRun>
+      <schedule>
+        <type>{{task.schedule_type}}</type>
+        <startDate>{{task.schedule_startDate}}</startDate>
+      </schedule>
+{% if task.property is defined %}
+      <properties>
+{% for property in task.property %}
+        <property>
+          <key>{{property.key}}</key>
+          <value>{{property.value}}</value>
+        </property>
+{% endfor %}
+      </properties>
+{% endif %}
+    </task>
+{% endfor %}
+  </tasks>
+{% endif %}
   <smtpConfiguration>
     <hostname>{{nexus_smtpConfiguration_hostname}}</hostname>
     <port>{{nexus_smtpConfiguration_port}}</port>
