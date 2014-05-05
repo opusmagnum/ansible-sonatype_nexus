@@ -28,7 +28,7 @@
   register: tar_dir_name
 
 - name: nexus | Unarchive nexus 
-  Unarchive: 
+  unarchive: 
      copy=no
      src="{{nexus_dir_tmp}}/{{nexus_archive}}"
      dest="{{nexus_dir_base}}/"
