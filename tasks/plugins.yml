@@ -19,5 +19,6 @@
     src="{{nexus_dir_tmp}}/{{item.file}}"
     dest="{{nexus_dir_plugins}}/"
   sudo_user: "{{nexus_user}}"
+  when: download_results | changed
   with_items: nexus_plugins  
   tags: nexus
