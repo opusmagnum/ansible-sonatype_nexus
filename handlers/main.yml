@@ -3,4 +3,12 @@
     name="{{nexus_service_name}}"
     state=restarted
     enabled=true
-    
+  notify: wait_for_nexus  
+
+- name: wait_for_nexus
+  waif_for:
+    name="{{nexus_service_name}}"
+    port={{jetty_port}}
+    delay=30
+    timeout=120
+  notify: wait_for_nexus     

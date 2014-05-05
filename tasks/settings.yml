@@ -14,7 +14,7 @@
 - name: settings | Deploy nexus.xml
   template: 
     src=nexus.xml.j2
-    dest="{{nexus_dir_sonatype_work}}/nexus/conf/nexus2.xml"
+    dest="{{nexus_dir_sonatype_work}}/nexus/conf/nexus.xml"
     owner={{nexus_user}} 
     group={{nexus_user}}
     mode=0644
