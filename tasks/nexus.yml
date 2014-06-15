@@ -1,18 +1,11 @@
 ---
-
-- name: nexus | Install unzip 
-  apt: 
-    pkg=unzip
-    state="present"
-  tags: nexus
-
 - name: nexus | Create nexus user
   user: 
      name="{{nexus_user}}"
      home="{{nexus_home}}"
      shell="/bin/bash"
      append="true"
-     comment="Nexsus user"
+     comment="Nexus user"
   tags: nexus
 
 - name: nexus | Download nexus archive
@@ -23,7 +16,7 @@
 
 - name: nexus | Resolve nexus_dir name from tar
   shell: 
-    tar tf {{nexus_dir_tmp}}/{{nexus_archive}}  | head -1
+    tar tf {{nexus_dir_tmp}}/{{nexus_archive}}  | head -1 | awk -F/ '{print $1}'
   changed_when: False
   register: tar_dir_name
 
@@ -33,9 +26,32 @@
      src="{{nexus_dir_tmp}}/{{nexus_archive}}"
      dest="{{nexus_dir_base}}/"
      creates="{{nexus_dir_base}}/{{tar_dir_name.stdout}}/bin"
-  sudo_user: "{{nexus_user}}"
   notify: restart nexus
   register: nexus_unarchive
+  tags: nexus
+
+
+- name: Change ownership for Nexus folders
+  file: 
+    path="{{nexus_dir_base}}/{{tar_dir_name.stdout}}"
+    owner="{{nexus_user}}"
+    group="{{nexus_group}}"
+  tags: nexus
+
+- name: Change ownership for Nexus folders
+  file: 
+    path="{{nexus_dir_base}}/{{tar_dir_name.stdout}}"
+    owner="{{nexus_user}}"
+    group="{{nexus_group}}"
+    recurse=yes
+  tags: nexus
+
+- name: Change ownership for sonatype-work
+  file: 
+    path="{{nexus_dir_base}}/sonatype-work"
+    owner="{{nexus_user}}"
+    group="{{nexus_group}}"
+    recurse=yes
   tags: nexus
 
 - name: nexus | update sym link nexus 

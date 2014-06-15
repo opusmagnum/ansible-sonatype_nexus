@@ -1,5 +1,5 @@
 #! /bin/sh
-
+# {{ansible_managed}}
 #
 # Copyright (c) 1999, 2006 Tanuki Software Inc.
 #
@@ -23,7 +23,7 @@ NEXUS_HOME="{{nexus_dir_base}}/{{nexus_service_name}}"
 RUN_AS_USER={{nexus_user}}
 
 # Application
-APP_NAME="{{nexus_service_desc}}"
+APP_NAME="{{nexus_service_name}}"
 APP_LONG_NAME="{{nexus_service_desc}}"
 
 # Priority at which to run the wrapper.  See "man nice" for valid priorities.

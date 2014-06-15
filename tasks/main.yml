@@ -1,7 +1,9 @@
 ---
 
+- include     : prerequisites.yml
 - include     : nexus.yml
 - include     : plugins.yml
-  when        : nexus_plugins_install  
+  when : nexus_plugins_install  
 - include     : settings.yml
+  when : nexus_settings_install
 

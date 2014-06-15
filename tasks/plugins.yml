@@ -9,8 +9,8 @@
   ignore_errors: yes
   tags: nexus
 
-- name: plugins | Messange on dep fail
-  fail: msg="For some reason nexus repo broke. Please check link"
+- name: plugins | Message on dep fail
+  fail: msg="For some reason nexus plugin can not be downloaded. Please check link"
   when: download_results | failed
 
 - name: plugins | Unarchive nexus plugins

@@ -1,0 +1,28 @@
+---
+
+- name: nexus | Install unzip (Debian)
+  apt: 
+    pkg=unzip
+    state="present"
+  when: ansible_os_family == 'Debian'  
+
+- name: nexus | Install unzip (Debian)
+  apt: 
+    pkg=java-1.7.0-openjdk
+    state="present"
+  when: ansible_os_family == 'Debian'  
+
+
+- name: nexus | Install unzip (RedHat)
+  yum: 
+    pkg=unzip
+    state="present"
+  when: ansible_os_family == 'RedHat'
+  tags: nexus
+
+- name: nexus | Install JDK (RedHat)
+  yum: 
+    pkg=java-1.7.0-openjdk
+    state="present"
+  when: ansible_os_family == 'RedHat'
+  tags: nexus

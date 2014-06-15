@@ -1,6 +1,5 @@
 ---
 
-
 - name: settings | Deploy security.xml
   template:
     src=security.xml.j2
