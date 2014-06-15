@@ -7,6 +7,9 @@ Ansible Sonatype Nexus
 Added support for RedHat/CentOS.
 
 To test this role with Vagrant:
-	cd tests
-	vagrant up --no-provision
-	export ANSIBLE_ROLES_PATH=../..; vagrant provision
+
+```
+cd tests
+vagrant up --no-provision
+export ANSIBLE_ROLES_PATH=../..; vagrant provision
+```
