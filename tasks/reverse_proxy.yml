@@ -23,6 +23,9 @@
 - name: Create configuration folder
   file: path=/etc/nginx/conf.d group=nginx owner=nginx state=directory
 
+- name: Clean up default configuration
+  shell: rm -f  /etc/nginx/conf.d/*.conf
+
 - name: Deploy Nginx configuration
   template:
     src=nexus.conf.j2

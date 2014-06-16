@@ -14,7 +14,6 @@ server {
     root   /usr/share/nginx/html;
     index  index.html index.htm;
  
-    ## send request back to apache1 ##
     location / {
      proxy_pass  http://nexus;
      proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
