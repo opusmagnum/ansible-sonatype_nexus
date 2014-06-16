@@ -9,4 +9,7 @@
   wait_for:
     port={{jetty_port}}
     delay=30
-    timeout=120   
+    timeout=120
+
+- name: restart nginx
+  service: name=nginx state=restarted

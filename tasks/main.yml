@@ -1,9 +1,11 @@
 ---
 
-- include     : prerequisites.yml
-- include     : nexus.yml
-- include     : plugins.yml
-  when : nexus_plugins_install  
-- include     : settings.yml
-  when : nexus_settings_install
+- include: prerequisites.yml
+- include: nexus.yml
+- include: plugins.yml
+  when: nexus_plugins_install  
+- include: settings.yml
+  when: nexus_settings_install
+- include: reverse_proxy.yml  
+  when: nexus_reverse_proxy_install
 

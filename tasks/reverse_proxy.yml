@@ -1,0 +1,34 @@
+---
+
+- name: Install Nginx (Debian)
+  apt: 
+    pkg=nginx
+    state="present"
+  when: ansible_os_family == 'Debian'  
+  tags: reverse_proxy
+
+- name: Add Nginx repository
+  template:
+    src=nginx.repo.j2
+    dest="/etc/yum.repos.d/nginx.repo"
+  when: ansible_os_family == 'RedHat'
+
+- name: Install Nginx (RedHat)
+  yum: 
+    pkg=nginx
+    state="present"
+  when: ansible_os_family == 'RedHat'
+  tags: reverse_proxy
+
+- name: Create configuration folder
+  file: path=/etc/nginx/conf.d group=nginx owner=nginx state=directory
+
+- name: Deploy Nginx configuration
+  template:
+    src=nexus.conf.j2
+    dest="/etc/nginx/conf.d/nexus.conf"
+    owner={{nexus_user}} 
+    group={{nexus_user}}
+    mode=0644
+  notify: restart nginx
+  tags: reverse_proxy

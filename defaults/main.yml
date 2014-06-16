@@ -1,5 +1,6 @@
-nexus_settings_install   : False
-nexus_plugins_install    : True
+nexus_settings_install      : False
+nexus_plugins_install       : True
+nexus_reverse_proxy_install : True
 
 ## Nexus Setup Setting Section
 nexus_host               : "{{ansible_fqdn}}"
@@ -20,7 +21,6 @@ nexus_sonatype_work_name : "sonatype-work"
 nexus_dir_base           : "/opt"
 nexus_dir_base_bundle    : "/opt/{{nexus_service_name}}"
 nexus_dir_sonatype_work  : "{{nexus_dir_base}}/{{nexus_sonatype_work_name}}"
-#nexus_dir_plugins        : "{{nexus_dir_base_bundle}}/nexus/WEB-INF/plugin-repository"
 nexus_dir_plugins        : "{{nexus_dir_sonatype_work}}/nexus/plugin-repository"
 nexus_dir_tmp            : "/tmp"
 nexus_archive            : "nexus-{{nexus_version}}-bundle.tar.gz"
@@ -29,7 +29,6 @@ nexus_archive            : "nexus-{{nexus_version}}-bundle.tar.gz"
 ### p2 plugins
 
 nexus_plugins_p2_version         : "2.8.1-01"
-#nexus_plugins_p2_url             : 'https://repository.sonatype.org/service/local/repositories/nexus_oss-1069/content/org/sonatype/nexus/plugins'
 nexus_plugins_p2_url             : 'https://repository.sonatype.org/service/local/repositories/releases/content/org/sonatype/nexus/plugins'
 nexus_plugins_p2_dir             : "nexus-p2-repository-plugin/{{nexus_plugins_p2_version}}" 
 nexus_plugins_p2_file            : "nexus-p2-repository-plugin-{{nexus_plugins_p2_version}}-bundle.zip"
@@ -326,4 +325,3 @@ nexus_smtpConfiguration_port                          : 25
 nexus_smtpConfiguration_username                      : ""
 nexus_smtpConfiguration_password                      : ""
 nexus_smtpConfiguration_systemEmailAddress            : "system@nexus.org"
-
