@@ -1,6 +1,10 @@
 nexus_settings_install      : False
 nexus_plugins_install       : True
 nexus_reverse_proxy_install : True
+nginx_server_name           : localhost 
+nginx_ssl_certificate_key   : /path/to/server.crt
+nginx_ssl_certificate_key   : /path/to/server.key
+
 
 ## Nexus Setup Setting Section
 nexus_host               : "{{ansible_fqdn}}"
